@@ -1,0 +1,148 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventario Productos Limpieza</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🧼 Gestor de Inventario</h1>
+            <nav class="tabs">
+                <button class="active" data-tab="inventario">Inventario</button>
+                <button data-tab="movimientos">Movimientos</button>
+                <button data-tab="reportes">Reportes</button>
+            </nav>
+        </header>
+
+        <!-- Sección Inventario -->
+        <div id="inventario" class="tab-content active">
+            <button class="btn-add" onclick="showProductModal()">➕ Nuevo Producto</button>
+            <div id="product-list" class="list"></div>
+        </div>
+
+        <!-- Sección Movimientos -->
+        <div id="movimientos" class="tab-content">
+            <button class="btn-add" onclick="showMovementModal()">📥📤 Registrar Movimiento</button>
+            <div id="movement-list" class="list"></div>
+        </div>
+
+        <!-- Sección Reportes -->
+        <div id="reportes" class="tab-content">
+            <div class="stats">
+                <div class="stat-card critical">Productos Críticos: <span id="critical-count">0</span></div>
+                <div class="stat-card total">Valor Total: $<span id="total-value">0</span></div>
+            </div>
+            <canvas id="stockChart"></canvas>
+        </div>
+
+        <!-- Modales -->
+        <div id="productModal" class="modal">
+            <div class="modal-content">
+                <h2>🆕 Nuevo Producto</h2>
+                <form id="productForm" onsubmit="handleProductSubmit(event)">
+                    <input type="hidden" id="productId">
+                    <div class="form-group">
+                        <input type="text" id="productName" placeholder="Nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <select id="productCategory" required>
+                            <option value="">Categoría</option>
+                            <option>Detergentes</option>
+                            <option>Desinfectantes</option>
+                            <option>Aromatizantes</option>
+                            <option>Herramientas</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="number" id="productStock" placeholder="Stock Inicial" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="number" id="productMinStock" placeholder="Stock Mínimo" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="number" step="0.01" id="productPrice" placeholder="Precio Unitario" required>
+                    </div>
+                    <div class="modal-actions">
+                        <button type="button" onclick="closeModals()">Cancelar</button>
+                        <button type="submit">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="movementModal" class="modal">
+            <div class="modal-content">
+                <h2>📥📤 Registrar Movimiento</h2>
+                <form id="movementForm" onsubmit="handleMovementSubmit(event)">
+                    <div class="form-group">
+                        <select id="movementProduct" required>
+                            <option value="">Seleccionar Producto</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="number" id="movementQuantity" placeholder="Cantidad" required>
+                    </div>
+                    <div class="form-group">
+                        <select id="movementType" required>
+                            <option value="entry">Entrada</option>
+                            <option value="exit">Salida</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="date" id="movementDate" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="movementNotes" placeholder="Notas"></textarea>
+                    </div>
+                    <div class="modal-actions">
+                        <button type="button" onclick="closeModals()">Cancelar</button>
+                        <button type="submit">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="app.js"></script>
+    <!-- Agrega este bloque antes del cierre de </body> -->
+    <div id="authModal" class="modal">
+        <div class="modal-content">
+            <h2>🔐 Iniciar Sesión</h2>
+            <div class="auth-options">
+                <button onclick="signInWithGoogle()">Google</button>
+                <button onclick="showEmailAuth()">Email</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase Config -->
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-analytics.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      const firebaseConfig = {
+        apiKey: "AIzaSyDVyBQkm3I6hzAMfSFxO3it6GimB6b3GTk",
+        authDomain: "inventario-productos-b2b7a.firebaseapp.com",
+        projectId: "inventario-productos-b2b7a",
+        storageBucket: "inventario-productos-b2b7a.firebasestorage.app",
+        messagingSenderId: "1080789959393",
+        appId: "1:1080789959393:web:4daf75f337b5bfa81e6da0",
+        measurementId: "G-DD23FLKDCL"
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+    </script>
+</body>
+</html>
