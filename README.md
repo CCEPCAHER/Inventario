@@ -1,2 +1,0 @@
-# Inventario
-San Adrián
