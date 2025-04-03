@@ -1,4 +1,4 @@
-/* style.css */
+/* Reset y estilos básicos */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -9,23 +9,28 @@ body {
     font-family: 'Segoe UI', sans-serif;
     background: #f5f5f5;
     color: #333;
+    line-height: 1.5;
 }
 
+/* Contenedor principal */
 .container {
-    max-width: 100%;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 15px;
 }
 
+/* Cabecera */
 header {
     text-align: center;
     margin-bottom: 20px;
 }
 
+/* Pestañas de navegación */
 .tabs {
     display: flex;
     gap: 5px;
     margin-top: 15px;
+    flex-wrap: wrap;
 }
 
 .tabs button {
@@ -36,6 +41,11 @@ header {
     cursor: pointer;
     border-radius: 8px;
     font-weight: 500;
+    transition: background 0.3s;
+}
+
+.tabs button:hover {
+    background: #ccc;
 }
 
 .tabs button.active {
@@ -43,28 +53,44 @@ header {
     color: white;
 }
 
+/* Contenido de pestañas */
 .tab-content {
     display: none;
     margin-top: 20px;
+    animation: fadeIn 0.3s ease-in-out;
 }
 
 .tab-content.active {
     display: block;
 }
 
+/* Animación para la aparición de contenido */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Listas de productos y movimientos */
 .list {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
+/* Tarjetas de producto y movimiento */
 .product-item, .movement-item {
     background: white;
     padding: 15px;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
 }
 
+.product-item:hover, .movement-item:hover {
+    transform: translateY(-3px);
+}
+
+/* Botón de agregar elemento */
 .btn-add {
     width: 100%;
     padding: 15px;
@@ -74,8 +100,15 @@ header {
     border-radius: 8px;
     margin-bottom: 15px;
     cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s;
 }
 
+.btn-add:hover {
+    background: #1976D2;
+}
+
+/* Modal */
 .modal {
     display: none;
     position: fixed;
@@ -86,16 +119,20 @@ header {
     background: rgba(0,0,0,0.5);
     justify-content: center;
     align-items: center;
+    padding: 10px;
+    z-index: 1000;
 }
 
 .modal-content {
     background: white;
     padding: 20px;
     border-radius: 10px;
-    width: 90%;
+    width: 100%;
     max-width: 500px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
 }
 
+/* Grupos de formulario */
 .form-group {
     margin-bottom: 15px;
 }
@@ -106,8 +143,10 @@ input, select, textarea {
     border: 1px solid #ddd;
     border-radius: 8px;
     margin-top: 5px;
+    font-size: 1rem;
 }
 
+/* Acciones en el modal */
 .modal-actions {
     display: flex;
     gap: 10px;
@@ -120,12 +159,34 @@ input, select, textarea {
     border: none;
     border-radius: 8px;
     cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s;
 }
 
+.modal-actions button:first-child {
+    background: #f44336;
+    color: white;
+}
+
+.modal-actions button:first-child:hover {
+    background: #d32f2f;
+}
+
+.modal-actions button:last-child {
+    background: #4CAF50;
+    color: white;
+}
+
+.modal-actions button:last-child:hover {
+    background: #388E3C;
+}
+
+/* Tarjetas de estadísticas */
 .stats {
     display: grid;
     gap: 10px;
     margin-bottom: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
 }
 
 .stat-card {
@@ -133,13 +194,38 @@ input, select, textarea {
     border-radius: 8px;
     color: white;
     text-align: center;
+    font-weight: bold;
 }
 
-.stat-card.critical { background: #f44336; }
-.stat-card.total { background: #4CAF50; }
+.stat-card.critical {
+    background: #f44336;
+}
 
+.stat-card.total {
+    background: #4CAF50;
+}
+
+/* Gráfica */
 #stockChart {
     width: 100%;
     max-width: 600px;
-    margin: 0 auto;
+    margin: 20px auto;
+}
+
+/* Ajustes para dispositivos móviles */
+@media (max-width: 600px) {
+    .tabs button {
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+
+    .btn-add {
+        font-size: 0.9rem;
+        padding: 12px;
+    }
+
+    input, select, textarea {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
 }
