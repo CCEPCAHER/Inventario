@@ -39,7 +39,7 @@
       <canvas id="stockChart"></canvas>
     </div>
 
-    <!-- Modales -->
+    <!-- Modal Producto -->
     <div id="productModal" class="modal">
       <div class="modal-content">
         <h2>🆕 Nuevo Producto</h2>
@@ -66,6 +66,10 @@
           <div class="form-group">
             <input type="number" step="0.01" id="productPrice" placeholder="Precio Unitario" required>
           </div>
+          <!-- Campo para subir la imagen del producto -->
+          <div class="form-group">
+            <input type="file" id="productImage" accept="image/*">
+          </div>
           <div class="modal-actions">
             <button type="button" onclick="closeModals()">Cancelar</button>
             <button type="submit">Guardar</button>
@@ -74,6 +78,7 @@
       </div>
     </div>
 
+    <!-- Modal Movimiento -->
     <div id="movementModal" class="modal">
       <div class="modal-content">
         <h2>📥📤 Registrar Movimiento</h2>
@@ -107,17 +112,14 @@
     </div>
   </div>
 
+  <!-- Carga Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   
-  <!-- Bloque de configuración de Firebase -->
+  <!-- Configuración de Firebase -->
   <script type="module">
-    // Importa las funciones necesarias del SDK de Firebase
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
     import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-analytics.js";
-    // TODO: Agregar otros SDKs de Firebase que necesites
-    // https://firebase.google.com/docs/web/setup#available-libraries
 
-    // Configuración de Firebase de tu proyecto
     const firebaseConfig = {
       apiKey: "AIzaSyDVyBQkm3I6hzAMfSFxO3it6GimB6b3GTk",
       authDomain: "inventario-productos-b2b7a.firebaseapp.com",
@@ -128,15 +130,14 @@
       measurementId: "G-DD23FLKDCL"
     };
 
-    // Inicializa Firebase y Analytics
     const appFirebase = initializeApp(firebaseConfig);
     const analytics = getAnalytics(appFirebase);
   </script>
 
-  <!-- Carga el script de la aplicación como módulo para usar import/export -->
+  <!-- Carga el script de la aplicación -->
   <script type="module" src="app.js"></script>
 
-  <!-- Modal de autenticación (asegúrate de implementar signInWithGoogle() y showEmailAuth() en app.js o en otro script) -->
+  <!-- Modal de autenticación (implementar funciones correspondientes) -->
   <div id="authModal" class="modal">
     <div class="modal-content">
       <h2>🔐 Iniciar Sesión</h2>
